@@ -1,4 +1,6 @@
 # NeoQwertz
+https://neo-layout.org/Layouts/neoqwertz/  
+
 To use this, you will have to activate a german keyboard layout.  
 If you are not using Linux, change the line: 
 `#define UNICODE_SELECTED_MODES UC_LNX`  

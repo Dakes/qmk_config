@@ -292,7 +292,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
-    * Layer 5 big greek letters and mathematical symbols
+    * Layer 6 big greek letters and mathematical symbols
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
     * |        |   ℚ  |   Ω  |   ∃  |   ℝ  |   ∂  |                              |   ℤ  |   ⊂  |   ∫  |   ∈  |   Π  |    ∪   |
