@@ -326,43 +326,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Layer 5 small greek letters
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |        |   ϕ  |   ω  |   ε  |   ρ  |   τ  |                              |   ζ  |   ψ  |   ι  |   ο  |   π  |    ς   |
+    * |    ₁   |   ξ  |   ϰ  |   λ  |   χ  |   ω  |                              |   κ  |   ψ  |   γ  |   φ  |   ϕ  |    ς   |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |        |   α  |   σ  |   δ  |   φ  |   γ  |                              |   ψ  |   θ  |   κ  |   λ  |   ε  |    η   |
+    * |    ₂   |   θ  |   ι  |   α  |   ε  |   ο  |                              |   σ  |   ν  |   ρ  |   τ  |   δ  |    υ   |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |   υ  |   ξ  |   χ  |   π  |   β  |      |      |  |      |      |   ν  |   μ  |   ϱ  |   ϑ  |   ⟨  |    ⟩   |
+    * |    ₃   |   ₀  |   ϵ  |   η  |   π  |   ζ  |      |      |  |      |      |   β  |   μ  |   ϱ  |   ϑ  |   ⟨  |    ⟩   |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_5] = LAYOUT(
-        _______, X(Grk_phi_2), X(Grk_omega), X(Grk_epsilon), X(Grk_rho), X(Grk_tau),                                X(Grk_zeta), X(Grk_psi), X(Grk_iota), X(Grk_omicron), X(Grk_pi), X(Grk_finalsmallsigma),
-        _______, X(Grk_alpha), X(Grk_sigma), X(Grk_delta), X(Grk_phi), X(Grk_gamma),                                X(Grk_psi), X(Grk_theta_2), X(Grk_kappa), X(Grk_lambda), X(Grk_epsilon), X(Grk_psi_2),
-        _______, X(Grk_upsilon), X(Grk_xi), X(Grk_chi), X(Grk_pi), X(Grk_beta), _______, _______, _______, _______, X(Grk_nu), X(Grk_mu), X(Grk_rho_2), X(Grk_theta), X(bra), X(ket),
-                                                     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+            X(superskript_1), X(Grk_xi), X(Grk_KAPPA), X(Grk_lambda), X(Grk_chi), X(Grk_omega),                                       X(Grk_kappa), X(Grk_psi), X(Grk_gamma), X(Grk_phi), X(Grk_phi_2), X(Grk_finalsmallsigma),
+            X(superskript_2), X(Grk_theta_2), X(Grk_iota), X(Grk_alpha), X(Grk_epsilon), X(Grk_omicron),                              X(Grk_sigma), X(Grk_nu), X(Grk_rho), X(Grk_tau), X(Grk_delta), X(Grk_upsilon),
+            X(superskript_3), X(superskript_0), X(Grk_eta), X(Grk_psi_2), X(Grk_pi), X(Grk_zeta), _______, _______, _______, _______, X(Grk_beta), X(Grk_mu), X(Grk_rho_2), X(Grk_theta), X(bra), X(ket),
+            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
     /*
-    * Layer 5 big greek letters and mathematical symbols
+    * Layer 6 big greek letters and mathematical symbols
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |        |   ℚ  |   Ω  |   ∃  |   ℝ  |   ∂  |                              |   ℤ  |   ⊂  |   ∫  |   ∈  |   Π  |    ∪   |
+    * |    ∞   |   Ξ  |   √  |   Λ  |   ℂ  |   Ω  |                              |   ×  |   Ψ  |   Γ  |   Φ  |   ℚ  |    ∘   |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |        |   ∀  |   Σ  |   Δ  |   Φ  |   Γ  |                              |   Ψ  |   Θ  |   ×  |   Λ  |   ∩  |    ℵ   |
+    * |    ∅   |   ⊂  |   ∫  |   ∀  |   ∃  |   ∈  |                              |   Σ  |   ℕ  |   ℝ  |   ∂  |   Δ  |    ∇   |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |   ∇  |   Ξ  |   ℂ  |   √  |   ⇐  |      |      |  |      |      |   ℕ  |   ⇔  |   ⇒  |   ↦  |   ∞  |    ∅   |
+    * |    ∥   |   ∪  |   ∩  |   ℵ  |   Π  |   ℤ  |      |      |  |      |      |   ⇐  |   ⇔  |   ⇒  |   ↦  |   Θ  |    ∡   |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
-     [_LAYER_6] = LAYOUT(
-       _______, X(rational), X(Greek_OMEGA), X(there_exists), X(real), X(partialderivative),                      X(integers), X(includedin), X(integral), X(elementof), X(Greek_PI), X(_union),
-       _______, X(for_all), X(Greek_SIGMA), X(Greek_DELTA), X(Greek_PHI), X(Greek_GAMMA),                         X(Greek_PSI), X(Greek_THETA), X(times), X(Greek_LAMBDA), X(intersection), X(U2135),
-       _______, X(nabla), X(Greek_XI), X(komplex), X(radical), X(U21D0), _______, _______, _______, _______, X(natural), X(ifonlyif), X(implies), X(U21A6), X(infinity), X(emptyset),
-                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-     ),
+    [_LAYER_6] = LAYOUT(
+            X(infinity), X(Greek_XI), X(radical), X(Greek_LAMBDA), X(komplex), X(Greek_OMEGA),                               X(times), X(Greek_PSI), X(Greek_GAMMA), X(Greek_PHI), X(rational), X(ring_operator),
+            X(emptyset), X(includedin), X(integral), X(for_all), X(there_exists), X(elementof),                              X(Greek_SIGMA), X(natural), X(real), X(partialderivative), X(Greek_DELTA), X(nabla),
+            X(parallel), X(_union), X(intersection), X(U2135), X(Greek_PI), X(integers), _______, _______, _______, _______, X(U21D0), X(ifonlyif), X(implies), X(U21A6), X(Greek_THETA), X(angle),
+            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
 
 
     /*

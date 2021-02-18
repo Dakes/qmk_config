@@ -10,7 +10,6 @@ The Function Layer will activate, when either LAY3 and LAY5, LAY4 and LAY6 or LA
 ### Layer 1: Base Layer, neo
 
 ```
-Base Layer: QWERTZ
 ,-------------------------------------------.                              ,-------------------------------------------.
 |LAY3/tab|   X  |   V  |   L  |   C  |   W  |                              |   K  |   H  |   G  |   F  |   Q  |ß/AltGr |
 |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
