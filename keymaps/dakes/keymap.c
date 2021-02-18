@@ -24,12 +24,20 @@
 enum layers
 {
     _NEO = 0,
+    _QWERTZ,
+    _GAMING,
     _LAYER_3,
     _LAYER_4,
     _LAYER_5,
     _LAYER_6,
     _FUNC
+    // alternative base layers
 };
+
+uint8_t base_layers[3] = {_NEO, _QWERTZ, _GAMING};
+uint8_t current_base_layer = _NEO;
+
+
 
 // enum for greek and mathematical unicode characters
 enum unicode_names {
@@ -42,13 +50,6 @@ enum unicode_names {
     ket, // ⟩
     infinity, // ∞
     emptyset, // ∅
-    parallel, // ∥
-    angle, // ∡
-    Grk_KAPPA, // ∡
-    superskript_0, // ₀
-    superskript_1, // ₁
-    superskript_2, // ₂
-    superskript_3, // ₃
 
     // Layer 5
     // third row
@@ -130,13 +131,6 @@ const uint32_t PROGMEM unicode_map[] = {
     [ket]  = 0x27E9, // ⟩
     [infinity]  = 0x221E, // ∞
     [emptyset]  = 0x2205, // ∅
-    [parallel]  = 0x2225, // ∥
-    [angle]  = 0x2221, // ∡
-    [Grk_KAPPA]  = 0x3F0, // ∡
-    [superskript_0]  = 0x3F0, // ₀
-    [superskript_1]  = 0x3F0, // ₁
-    [superskript_2]  = 0x3F0, // ₂
-    [superskript_3]  = 0x3F0, // ₃
 
     // Layer 5
 
@@ -234,11 +228,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                        `----------------------------------'  `----------------------------------'
     */
     [_NEO] = LAYOUT(
-        LT(_LAYER_3, KC_TAB), KC_X, KC_V,   KC_L,   KC_C,   KC_W,                                                             DE_K, KC_H, KC_G,    KC_F,    KC_Q, ALGR_T(DE_SS),
-        KC_LSFT,            KC_U,   KC_I,   KC_A,   KC_E,   KC_O,                                                             KC_S, KC_N, KC_R,    KC_T,    KC_D, RSFT_T(DE_Y),
-        KC_LCTRL,          DE_UDIA, DE_ODIA, DE_ADIA, KC_P, DE_Z, MO(_LAYER_5), MO(_LAYER_6),/**/ MO(_LAYER_5), MO(_LAYER_6), KC_B, KC_M, KC_COMM, KC_DOT,  KC_J, RCTL_T(DE_MINS),
-        
-              KC_MPLY, KC_LGUI, KC_LALT, LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /* */ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL, KC_MUTE
+            LT(_LAYER_3, KC_TAB), KC_X, KC_V,   KC_L,   KC_C,   KC_W,                                                             DE_K, KC_H, KC_G,    KC_F,    KC_Q, ALGR_T(DE_SS),
+            KC_LSFT,            KC_U,   KC_I,   KC_A,   KC_E,   KC_O,                                                             KC_S, KC_N, KC_R,    KC_T,    KC_D, RSFT_T(DE_Y),
+            KC_LCTRL,          DE_UDIA, DE_ODIA, DE_ADIA, KC_P, DE_Z, MO(_LAYER_5), MO(_LAYER_6),/**/ MO(_LAYER_5), MO(_LAYER_6), KC_B, KC_M, KC_COMM, KC_DOT,  KC_J, RCTL_T(DE_MINS),
+
+            KC_MPLY, KC_LGUI, KC_LALT, LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /* */ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL, KC_MUTE
+    ),
+
+    /*
+    * Base Layer: QWERTZ
+    *
+    * ,-------------------------------------------.                              ,-------------------------------------------.
+    * |LAY3/tab|   Q  |   W  |   E  |   R  |   T  |                              |   Z  |   U  |   I  |   O  |   P  |Ü/AltGr |
+    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+    * | LShift |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |Ä/RShift|
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+    * | LCtrl  |   Y  |   X  |   C  |   V  |   B  | LAY5 | LAY6 |  | LAY5 | LAY6 |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+    *                        |      |      |      | LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
+    *                        `----------------------------------'  `----------------------------------'
+    */
+    [_QWERTZ] = LAYOUT(
+            LT(_LAYER_3, KC_TAB), KC_Q, KC_W,   KC_E,   KC_R,   KC_T,                                                             DE_Z, KC_U, KC_I,    KC_O,    KC_P,    ALGR_T(DE_UDIA),
+            KC_LSFT,            KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                                             KC_H, KC_J, KC_K,    KC_L,    DE_ODIA, RSFT_T(DE_ADIA),
+            KC_LCTRL,           DE_Y,   KC_X,   KC_C,   KC_V,   KC_B, MO(_LAYER_5), MO(_LAYER_6),/**/ MO(_LAYER_5), MO(_LAYER_6), KC_N, KC_M, KC_COMM, KC_DOT,  DE_MINS, RCTL_T(DE_SS),
+
+            KC_MPLY, KC_LGUI, KC_LALT, LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /* */ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL, KC_MUTE
+    ),
+
+    /*
+    * Base Layer: Gaming
+    *
+    * ,-------------------------------------------.                              ,-------------------------------------------.
+    * |LAY3/tab|   Q  |   W  |   E  |   R  |   T  |                              |   Z  |   U  |   I  |   O  |   P  |Ü/AltGr |
+    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+    * | LShift |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |Ä/RShift|
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+    * | LCtrl  |   Y  |   X  |   C  |   V  |   B  | LAY5 | LAY6 |  | LAY5 | LAY6 |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+    *                        |      |      |      | LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
+    *                        `----------------------------------'  `----------------------------------'
+    */
+    [_GAMING] = LAYOUT(
+            LT(_LAYER_3, KC_TAB), KC_Q, KC_W,   KC_E,   KC_R,   KC_T,                                                             DE_Z, KC_U, KC_I,    KC_O,    KC_P,    ALGR_T(DE_UDIA),
+            KC_LSFT,            KC_A,   KC_A,   KC_W,   KC_D,   KC_G,                                                             KC_H, KC_J, KC_K,    KC_L,    DE_ODIA, RSFT_T(DE_ADIA),
+            KC_LCTRL,           DE_Y,   KC_X,   KC_S,   KC_V,   KC_B, MO(_LAYER_5), MO(_LAYER_6),/**/ MO(_LAYER_5), MO(_LAYER_6), KC_N, KC_M, KC_COMM, KC_DOT,  DE_MINS, RCTL_T(DE_SS),
+
+            KC_MPLY, KC_LGUI, KC_LALT, LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /* */ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL, KC_MUTE
     ),
 
     /*
@@ -270,16 +308,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
     * |        | home | left | down | right| end  |                              |   /  |   4  |   5  |   6  |   ,  |   .    |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |        |  esc |  tab |insert| enter|undo  |      |      |  |      |   0  |   :  |   1  |   2  |   3  |   ;  |   =    |
+    * |        |  esc |  tab |insert| enter|undo  |      |      |  |      |      |   :  |   1  |   2  |   3  |   ;  |   =    |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *                        |      |      |      |      |      |  |      |   0  |      |      |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_4] = LAYOUT(
-        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP, KC_DELETE, KC_PGDOWN,                                  DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
-        _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                      DE_SLSH, KC_4, KC_5, KC_6, KC_COMM, KC_DOT,
-        _______, KC_ESCAPE, KC_TAB, KC_INSERT, KC_ENTER, KC_UNDO, _______, _______, _______, KC_0, DE_COLN, KC_1, KC_2, KC_3, DE_SCLN, DE_EQL,
+        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP, KC_DELETE, KC_PGDOWN,                                       DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
+        _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END,                                         DE_SLSH, KC_4, KC_5, KC_6, KC_COMM, KC_DOT,
+        _______, KC_ESCAPE, KC_TAB, KC_INSERT, KC_ENTER, KC_UNDO, _______, _______, _______, _______, DE_COLN, KC_1, KC_2, KC_3, DE_SCLN, DE_EQL,
                                   _______, _______, _______, _______, _______, _______, KC_0, _______, _______, _______
     ),
 
@@ -288,42 +326,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Layer 5 small greek letters
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |    ₁   |   ξ  |   ϰ  |   λ  |   χ  |   ω  |                              |   κ  |   ψ  |   γ  |   φ  |   ϕ  |    ς   |
+    * |        |   ϕ  |   ω  |   ε  |   ρ  |   τ  |                              |   ζ  |   ψ  |   ι  |   ο  |   π  |    ς   |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |    ₂   |   θ  |   ι  |   α  |   ε  |   ο  |                              |   σ  |   ν  |   ρ  |   τ  |   δ  |    υ   |
+    * |        |   α  |   σ  |   δ  |   φ  |   γ  |                              |   ψ  |   θ  |   κ  |   λ  |   ε  |    η   |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |    ₃   |   ₀  |   ϵ  |   η  |   π  |   ζ  |      |      |  |      |      |   β  |   μ  |   ϱ  |   ϑ  |   ⟨  |    ⟩   |
+    * |        |   υ  |   ξ  |   χ  |   π  |   β  |      |      |  |      |      |   ν  |   μ  |   ϱ  |   ϑ  |   ⟨  |    ⟩   |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_5] = LAYOUT(
-        X(superskript_1), X(Grk_xi), X(Grk_KAPPA), X(Grk_lambda), X(Grk_chi), X(Grk_omega),                                       X(Grk_kappa), X(Grk_psi), X(Grk_gamma), X(Grk_phi), X(Grk_phi_2), X(Grk_finalsmallsigma),
-        X(superskript_2), X(Grk_theta_2), X(Grk_iota), X(Grk_alpha), X(Grk_epsilon), X(Grk_omicron),                              X(Grk_sigma), X(Grk_nu), X(Grk_rho), X(Grk_tau), X(Grk_delta), X(Grk_upsilon),
-        X(superskript_3), X(superskript_0), X(Grk_eta), X(Grk_psi_2), X(Grk_pi), X(Grk_zeta), _______, _______, _______, _______, X(Grk_beta), X(Grk_mu), X(Grk_rho_2), X(Grk_theta), X(bra), X(ket),
+        _______, X(Grk_phi_2), X(Grk_omega), X(Grk_epsilon), X(Grk_rho), X(Grk_tau),                                X(Grk_zeta), X(Grk_psi), X(Grk_iota), X(Grk_omicron), X(Grk_pi), X(Grk_finalsmallsigma),
+        _______, X(Grk_alpha), X(Grk_sigma), X(Grk_delta), X(Grk_phi), X(Grk_gamma),                                X(Grk_psi), X(Grk_theta_2), X(Grk_kappa), X(Grk_lambda), X(Grk_epsilon), X(Grk_psi_2),
+        _______, X(Grk_upsilon), X(Grk_xi), X(Grk_chi), X(Grk_pi), X(Grk_beta), _______, _______, _______, _______, X(Grk_nu), X(Grk_mu), X(Grk_rho_2), X(Grk_theta), X(bra), X(ket),
                                                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
     /*
-    * Layer 6 big greek letters and mathematical symbols
+    * Layer 5 big greek letters and mathematical symbols
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |    ∞   |   Ξ  |   √  |   Λ  |   ℂ  |   Ω  |                              |   ×  |   Ψ  |   Γ  |   Φ  |   ℚ  |    ∘   |
+    * |        |   ℚ  |   Ω  |   ∃  |   ℝ  |   ∂  |                              |   ℤ  |   ⊂  |   ∫  |   ∈  |   Π  |    ∪   |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |    ∅   |   ⊂  |   ∫  |   ∀  |   ∃  |   ∈  |                              |   Σ  |   ℕ  |   ℝ  |   ∂  |   Δ  |    ∇   |
+    * |        |   ∀  |   Σ  |   Δ  |   Φ  |   Γ  |                              |   Ψ  |   Θ  |   ×  |   Λ  |   ∩  |    ℵ   |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |    ∥   |   ∪  |   ∩  |   ℵ  |   Π  |   ℤ  |      |      |  |      |      |   ⇐  |   ⇔  |   ⇒  |   ↦  |   Θ  |    ∡   |
+    * |        |   ∇  |   Ξ  |   ℂ  |   √  |   ⇐  |      |      |  |      |      |   ℕ  |   ⇔  |   ⇒  |   ↦  |   ∞  |    ∅   |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        |      |      |      |      |      |  |      |      |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
      [_LAYER_6] = LAYOUT(
-        X(infinity), X(Greek_XI), X(radical), X(Greek_LAMBDA), X(komplex), X(Greek_OMEGA),                               X(times), X(Greek_PSI), X(Greek_GAMMA), X(Greek_PHI), X(rational), X(ring_operator),
-        X(emptyset), X(includedin), X(integral), X(for_all), X(there_exists), X(elementof),                              X(Greek_SIGMA), X(natural), X(real), X(partialderivative), X(Greek_DELTA), X(nabla),
-        X(parallel), X(_union), X(intersection), X(U2135), X(Greek_PI), X(integers), _______, _______, _______, _______, X(U21D0), X(ifonlyif), X(implies), X(U21A6), X(Greek_THETA), X(angle),
-                                                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+       _______, X(rational), X(Greek_OMEGA), X(there_exists), X(real), X(partialderivative),                      X(integers), X(includedin), X(integral), X(elementof), X(Greek_PI), X(_union),
+       _______, X(for_all), X(Greek_SIGMA), X(Greek_DELTA), X(Greek_PHI), X(Greek_GAMMA),                         X(Greek_PSI), X(Greek_THETA), X(times), X(Greek_LAMBDA), X(intersection), X(U2135),
+       _______, X(nabla), X(Greek_XI), X(komplex), X(radical), X(U21D0), _______, _______, _______, _______, X(natural), X(ifonlyif), X(implies), X(U21A6), X(infinity), X(emptyset),
+                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
      ),
 
 
@@ -331,7 +369,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Adjust Layer: Function keys, RGB, media
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |   esc  | F1   |  F2  | F3   | F4   | F5   |                              | F6   |  F7  |  F8  |  F9  | F10  |  F11   |
+    * |        | F1   |  F2  | F3   | F4   | F5   |                              | F6   |  F7  |  F8  |  F9  | F10  |  F11   |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
     * |        | TOG  | SAI  | HUI  | VAI  | MOD  |                              | VolUp|  F4  |  F5  |  F6  | F11  |  F12   |
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -342,11 +380,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                        `----------------------------------'  `----------------------------------'
     */
     [_FUNC] = LAYOUT(
-        KC_ESCAPE, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
         _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                                     KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_F12,
         _______, XXXXXXX, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, _______, _______, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12, XXXXXXX,
                                    _______, KC_MPRV, KC_MNXT, _______, _______, _______, _______, KC_MPRV, KC_MNXT, _______
     ),
+
+
 
 // /*
 //  * Layer template
@@ -424,32 +464,44 @@ static void render_status(void)
 {
     // QMK Logo and version information
     render_qmk_logo();
-    oled_write_P(PSTR("Neo\n\n"), false);
+    oled_write_P(PSTR("Dakes\n"), false);
+    uint8_t highest_layer = get_highest_layer(layer_state);
+
+    // Func Layer can cycle between base Layers, Display new Layer
+    if(highest_layer != _FUNC)
+        oled_write_P(PSTR("\n"), false);
+    else
+    {
+        oled_write_P(PSTR("New Base: "), false);
+        if(current_base_layer == _NEO)
+            oled_write_P(PSTR("Neo\n"), false);
+        else if(current_base_layer == _QWERTZ)
+            oled_write_P(PSTR("Qwertz\n"), false);
+        else if(current_base_layer == _GAMING)
+            oled_write_P(PSTR("Gaming\n"), false);
+    }
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Lay: "), false);
-    switch (get_highest_layer(layer_state))
+    if(highest_layer == _LAYER_3)
+        oled_write_P(PSTR("3: Symbols\n"), false);
+    else if(highest_layer == _LAYER_4)
+        oled_write_P(PSTR("4: Nav, Num\n"), false);
+    else if(highest_layer == _LAYER_5)
+        oled_write_P(PSTR("5: Greek\n"), false);
+    else if(highest_layer == _LAYER_6)
+        oled_write_P(PSTR("6: Math\n"), false);
+    else if(highest_layer == _FUNC)
+        oled_write_P(PSTR("Func: F,Med,RGB\n"), false);
+    else
     {
-        case _NEO:
-            oled_write_P(PSTR("Default\n"), false);
-            break;
-        case _LAYER_3:
-            oled_write_P(PSTR("3: Symbols\n"), false);
-            break;
-        case _LAYER_4:
-            oled_write_P(PSTR("4: Nav, Num\n"), false);
-            break;
-        case _LAYER_5:
-            oled_write_P(PSTR("5: Greek\n"), false);
-            break;
-        case _LAYER_6:
-            oled_write_P(PSTR("6: Math\n"), false);
-            break;
-        case _FUNC:
-            oled_write_P(PSTR("Func: F,Med,RGB\n"), false);
-            break;
-
-        default:
+        if(current_base_layer == _NEO)
+            oled_write_P(PSTR("Neo\n"), false);
+        else if(current_base_layer == _QWERTZ)
+            oled_write_P(PSTR("NeoQwertz\n"), false);
+        else if(current_base_layer == _GAMING)
+            oled_write_P(PSTR("Gaming\n"), false);
+        else
             oled_write_P(PSTR("Undefined\n"), false);
     }
 
@@ -473,32 +525,64 @@ void oled_task_user(void)
 #endif
 
 #ifdef ENCODER_ENABLE
+
+uint8_t selected_layer = 0;
+uint8_t base_layers_size = sizeof(base_layers)/sizeof(base_layers[0]);
+
 void encoder_update_user(uint8_t index, bool clockwise)
 {
     /*
-    rotaries
-    0: left
-    1: right
+        rotaries
+        0: left
+        1: right
     */
-    if (index == 0)
+    switch (get_highest_layer(layer_state))
     {
-        if (clockwise)
-        {
-            tap_code(KC_MEDIA_PREV_TRACK);
-        } else
-        {
-            tap_code(KC_MEDIA_NEXT_TRACK);
-        }
-    }
-    else if (index == 1)
-    {
-        if (clockwise)
-        {
-            tap_code(KC_AUDIO_VOL_DOWN);
-        } else
-        {
-            tap_code(KC_AUDIO_VOL_UP);
-        }
+        // on func layer switch base layer with encoder
+        case _FUNC:
+            if (index == 0 || index == 1)
+            {
+                if (clockwise)
+                {
+                    if(selected_layer != 0)
+                        selected_layer --;
+                    else
+                        selected_layer = base_layers_size - 1;
+                } else
+                {
+                    if(selected_layer < base_layers_size - 1)
+                        selected_layer ++;
+                    else
+                        selected_layer = 0;
+                }
+                set_single_persistent_default_layer(base_layers[selected_layer]);
+                current_base_layer = base_layers[selected_layer];
+                // tap_code(DF(base_layers[selected_layer]));
+            }
+            break;
+
+        default:
+            if (index == 0)
+            {
+                if (clockwise)
+                {
+                    tap_code(KC_MEDIA_PREV_TRACK);
+                } else
+                {
+                    tap_code(KC_MEDIA_NEXT_TRACK);
+                }
+            }
+            else if (index == 1)
+            {
+                if (clockwise)
+                {
+                    tap_code(KC_AUDIO_VOL_DOWN);
+                } else
+                {
+                    tap_code(KC_AUDIO_VOL_UP);
+                }
+            }
+            break;
     }
 }
 #endif

@@ -1,0 +1,24 @@
+
+//check numlock and turn off if on
+static void numlock_off(void)
+{
+    //Host Keyboard LED Status
+    led_t led_state = host_keyboard_led_state();
+    if (led_state.num_lock)
+    {
+        tap_code16(KC_NLCK);
+    }
+}
+
+// called on led status change
+void led_set_keymap(uint8_t usb_led)
+{
+    numlock_off();
+}
+
+// called on every keypress
+bool process_record_user(uint16_t keycode, keyrecord_t *record)
+{
+    numlock_off();
+    return true;
+}
