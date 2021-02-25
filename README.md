@@ -1,7 +1,9 @@
 # kyria
 My Kyria keymaps:  
 
-[Dakes](https://github.com/Dakes/kyria/tree/main/keymaps/dakes)  (The one I use)  
-[Neo](https://github.com/Dakes/kyria/tree/main/keymaps/dakes_neo)  
-[NeoQwertz](https://github.com/Dakes/kyria/tree/main/keymaps/dakes_neoqwertz/)  
-[Qwertz](https://github.com/Dakes/kyria/tree/main/keymaps/dakes_qwertz)  
+For Modular Bongo Cat look [here](keymaps/dakes)    
+
+[Dakes](keymaps/dakes)  (The one I use)  
+[Neo](keymaps/dakes_neo)  
+[NeoQwertz](keymaps/dakes_neoqwertz)  
+[Qwertz](keymaps/dakes_qwertz)  

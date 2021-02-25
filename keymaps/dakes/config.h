@@ -17,21 +17,50 @@
 #pragma once
 
 #ifdef OLED_DRIVER_ENABLE
-  #define OLED_DISPLAY_128X64
+    #define OLED_DISPLAY_128X64
+    #define OLED_TIMEOUT 60000
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-  #define RGBLIGHT_ANIMATIONS
-  #define RGBLIGHT_HUE_STEP 8
-  #define RGBLIGHT_SAT_STEP 8
-  #define RGBLIGHT_VAL_STEP 8
-  #define RGBLIGHT_LIMIT_VAL 175
+    /*
+    // by j-inc: https://github.com/qmk/qmk_firmware/blob/master/keyboards/kyria/keymaps/j-inc/config.h
+    #define RGBLIGHT_LED_MAP {0,1,2,9,8,7,4,3,5,6,19,18,17,10,11,12,15,16,14,13} // Orients Kyria LEDs to a circle around both halves.
+    //#define RBGLIGHT_LED_MAP {9,8,6,7,5,3,2,4,1,0,10,12,13,11,14,16,17,15,18,19} // Orients Kyria LEDs for a left half-right half columnar progression.
+    #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+    //#define RGBLIGHT_EFFECT_STATIC_GRADIENT
+    #define RGBLIGHT_SLEEP
+     */
+
+    #define RGBLIGHT_ANIMATIONS
+    #define RGBLIGHT_HUE_STEP 8
+    #define RGBLIGHT_SAT_STEP 8
+    #define RGBLIGHT_VAL_STEP 8
+    #define RGBLIGHT_LIMIT_VAL 175
 #endif
 
 #define ENCODER_RESOLUTION 2
+#define ENCODER_DIRECTION_FLIP
 
 #define UNICODE_SELECTED_MODES UC_LNX
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
+
+
+// optimizations from https://thomasbaart.nl/2018/12/01/reducing-firmware-size-in-qmk/
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+
+#ifndef NO_DEBUG
+    #define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+    #define NO_PRINT
+#endif // !NO_PRINT
+
+// needed for tap code mod hold
+// #define NO_ACTION_TAPPING
+#define NO_ACTION_ONESHOT
+#define TAPPING_FORCE_HOLD
+#define DISABLE_LEADER
