@@ -1,9 +1,9 @@
 # kyria
+
+For Modular Bongo Cat look in my [userspace](userspace/dakes/)  
+
 My Kyria keymaps:  
 
-For Modular Bongo Cat look [here](keymaps/dakes)    
-
-[Dakes](keymaps/dakes)  (The one I use)  
-[Neo](keymaps/dakes_neo)  
-[NeoQwertz](keymaps/dakes_neoqwertz)  
-[Qwertz](keymaps/dakes_qwertz)  
+[Dakes](kyria/keymaps/dakes)  (The one I use)  
+[Neo](kyria/keymaps/dakes_neo): As true to the original Neo layout as possible. Includes all Greek and Math symbold on Lyers 5&6.  
+[NeoQwertz](kyria/keymaps/dakes_neoqwertz): All advantages of Neo with the qwertz layout.  
