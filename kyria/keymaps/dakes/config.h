@@ -16,9 +16,12 @@
 
 #pragma once
 
+#define MASTER_LEFT
+
 #ifdef OLED_DRIVER_ENABLE
     #define OLED_DISPLAY_128X64
-    #define OLED_TIMEOUT 60000
+    #define OLED_TIMEOUT 90000
+    /* #define OLED_SCROLL_TIMEOUT 10000 */
 #endif
 
 #ifdef RGBLIGHT_ENABLE
@@ -31,10 +34,11 @@
     #define RGBLIGHT_SLEEP
      */
 
-    #define RGBLIGHT_ANIMATIONS
-    #define RGBLIGHT_HUE_STEP 8
-    #define RGBLIGHT_SAT_STEP 8
-    #define RGBLIGHT_VAL_STEP 8
+    // #define RGBLIGHT_ANIMATIONS
+    #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+    #define RGBLIGHT_HUE_STEP 16
+    #define RGBLIGHT_SAT_STEP 16
+    #define RGBLIGHT_VAL_STEP 16
     #define RGBLIGHT_LIMIT_VAL 175
 #endif
 
@@ -64,3 +68,20 @@
 #define NO_ACTION_ONESHOT
 #define TAPPING_FORCE_HOLD
 #define DISABLE_LEADER
+
+#define DEBUG_MATRIX_SCAN_RATE
+
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 250
+// Prevent normal rollover on alphas from accidentally triggering mods.
+#define IGNORE_MOD_TAP_INTERRUPT
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define TAPPING_FORCE_HOLD
+
+
+// Trackball
+// #define TRACKBALL_NO_MATH
+#define TRACKBALL_ANGLE_OFFSET 45
+#define TRACKBALL_ORIENTATION 3
+#define TRACKBALL_REVERSE_HSCROLL false
+#define TRACKBALL_ACCELERATION_WINDOW 50000 // ms window to increase acceleration factor
