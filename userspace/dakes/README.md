@@ -51,3 +51,14 @@ Notes:
 - The numbers for bongo_light don't include the changes to drivers/oled.  
 - You could remove `#include <stdio.h>` from Pierre Chevalier's bongo_light and replace `sprintf` by my method of rendering the WPM String 
   to save additional ~1200 bytes. 
+
+# Hotswap Trackball
+With the bottom housing of a sacrificial switch, a few headers, standoffs and epoxy putty it is possible to make the pimoroni trackball hotswappable, like so:  
+
+<img src="/images/trackball_1.jpg" width="256" /> 
+<img src="/images/trackball_2.jpg" width="256" />  
+<img src="/images/trackball_3.jpg" width="256" /> 
+<img src="/images/trackball_4.jpg" width="256" />  
+<img src="/images/trackball_5.jpg" width="256" /> 
+<img src="/images/trackball_6.jpg" width="256" />  
+<img src="/images/trackball_7.jpg" width="256" /> 
