@@ -36,7 +36,8 @@
 
 enum layers
 {
-    _NEO = 0,
+    _COLEMAK_DH = 0,
+    _NEO,
     _QWERTZ,
     _GAMING,
     _LAYER_3,
@@ -44,7 +45,7 @@ enum layers
     _FUNC
 };
 
-uint8_t base_layers[3] = {_NEO, _QWERTZ, _GAMING};
+uint8_t base_layers[4] = {_NEO, _COLEMAK_DH, _QWERTZ, _GAMING};
 uint8_t current_base_layer = _NEO;
 
 /*
@@ -81,6 +82,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         LT(_LAYER_3, KC_C), KC_W,                                                              /**/                                             DE_K,               LT(_LAYER_3, KC_H), KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
             KC_LSFT,              LGUI_T(KC_U), LALT_T(KC_I), LSFT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       RSFT_T(KC_R), LALT_T(KC_T), LGUI_T(KC_D), RSFT_T(DE_Y),
             KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      KC_P,               DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               KC_M,               KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
+                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
+                    ),
+
+    /*
+    * Base Layer: Colemak-DH
+    *
+    * ,-------------------------------------------.                              ,-------------------------------------------.
+    * |LAY3/tab|   Q  |   W  |   F  | L3/P |   B  |                              |   J  | L3/L |   U  |   Y  |   Ö  |Ü/AltGr |
+    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+    * | LShift |GUI/A |ALT/R |SHFT/S|STRG/T| L4/G |                              | L4/M |STRG/N|SHFT/E|ALT/I |GUI/O |Ä/RShift|
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+    * | LCtrl  |   Z  |   X  |   C  |   D  |   V  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   K  |   H  | , ;  | . :  |  - _ | ß/RCtl |
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+    *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
+    *                        `----------------------------------'  `----------------------------------'
+    */
+    [_COLEMAK_DH] = LAYOUT(
+            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         LT(_LAYER_3, KC_P), KC_B,                                                              /**/                                             DE_J,               LT(_LAYER_3, KC_L), KC_U,         DE_Y,         DE_ODIA,      ALGR_T(DE_UDIA),
+            KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_R), LSFT_T(KC_S), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                                /**/                                             LT(_LAYER_4, KC_M), LCTL_T(KC_N),       RSFT_T(KC_E), LALT_T(KC_I), LGUI_T(KC_O), RSFT_T(DE_ADIA),
+            KC_LCTRL,             DE_Z,         KC_X,         KC_C,         KC_D,               KC_V,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               KC_H,               KC_COMM,      KC_DOT,       DE_MINS,      RCTL_T(DE_SS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -355,11 +377,10 @@ void pointing_device_task() {
     }
 
     switch (get_highest_layer(layer_state)) {
+        case _COLEMAK_DH:
         case _NEO:
-            trackball_set_rgbw(0, 200, 0, 0);
-            break;
         case _QWERTZ:
-            trackball_set_rgbw(200, 0, 0, 0);
+            trackball_set_rgbw(0, 200, 0, 0);
             break;
         case _LAYER_3:
             trackball_set_rgbw(200, 0, 200, 0);
@@ -417,6 +438,8 @@ static bool render_status(void)
         oled_write_P(PSTR("New Base: "), false);
         if(current_base_layer == _NEO)
             oled_write_P(PSTR("Neo\n"), false);
+        else if(current_base_layer == _COLEMAK_DH)
+            oled_write_P(PSTR("Colemak-DH\n"), false);
         else if(current_base_layer == _QWERTZ)
             oled_write_P(PSTR("Qwertz\n"), false);
         else if(current_base_layer == _GAMING)
@@ -436,11 +459,6 @@ static bool render_status(void)
         oled_write_P(PSTR("4: Nav, Num\n"), false);
         scroll_timer = 0;
     }
-    /*
-    else if(highest_layer == _LAYER_5)
-        oled_write_P(PSTR("5: Greek\n"), false);
-    else if(highest_layer == _LAYER_6)
-        oled_write_P(PSTR("6: Math\n"), false);*/
     else if(highest_layer == _FUNC)
     {
         oled_write_P(PSTR("Func: F,Med,RGB\n"), false);
@@ -450,8 +468,10 @@ static bool render_status(void)
     {
         if(current_base_layer == _NEO)
             oled_write_P(PSTR("Neo\n"), false);
+        else if(current_base_layer == _COLEMAK_DH)
+            oled_write_P(PSTR("Colemak-DH\n"), false);
         else if(current_base_layer == _QWERTZ)
-            oled_write_P(PSTR("NeoQwertz\n"), false);
+            oled_write_P(PSTR("Qwertz\n"), false);
         else if (current_base_layer == _GAMING)
             oled_write_P(PSTR("Gaming\n"), false);
     }
@@ -475,10 +495,12 @@ void oled_task_user(void)
 
     #if defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
     static bool logos_rendered = false;
+    // BONGO_DEBUG renders bongocat on master, to debug without having to reattach the USB cable all the time
     #ifdef BONGO_DEBUG
     if (!is_keyboard_master())
     #endif
     #ifndef BONGO_DEBUG
+    // normal case
     if (is_keyboard_master())
     #endif
     {

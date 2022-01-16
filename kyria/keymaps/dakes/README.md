@@ -5,10 +5,13 @@ If you are not using Linux, change the line:
 `#define UNICODE_SELECTED_MODES UC_LNX`  
 in `config.h` according to your operating system. 
 
-The Function Layer will activate, when LAY3 and LAY4.  
-On the Function Layer the encoders will cycle through the base layers. The current one will be displayed on the OLED  
+The Function Layer will activate, when LAY3 and LAY4 are activaed in any order.  
+On the Function Layer the encoders will cycle through the base layers. The current and new one will be displayed on the OLED  
 
-For modular Bongocat, look in my userspace: [/userspace/dakes/](/userspace/dakes/)__
+For modular Bongocat, look in my [userspace](/userspace/dakes/).  
+
+<img src="/images/kyria_dakes_green.jpg" width="512" />
+<img src="/images/kyria_dakes_matcha.jpg" width="512" />  
 
 # Layers
 ## Layer 1: Base Layers
@@ -27,6 +30,21 @@ https://neo-layout.org/
                   ---> |      |      |      | LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      | <---
                        `----------------------------------'  `----------------------------------'
 ```
+
+### Colemak-DH
+```
+,-------------------------------------------.                              ,-------------------------------------------.
+|LAY3/tab|   Q  |   W  |   F  | L3/P |   B  |                              |   J  | L3/L |   U  |   Y  |   Ö  |Ü/AltGr |
+|--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+| LShift |A/GUI |R/ALT |S/SHFT|T/STRG| L4/G |                              | L4/M |N/STRG|E/SHFT|I/ALT |O/GUI |Ä/RShift|
+|--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+| LCtrl  |   Z  |   X  |   C  |   D  |   V  |L4/ESC|L3/ESC|  |L4/F5 |L3/F5 |   K  |   H  | , ;  | . :  |  - _ | ß/RCtl |
+`----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+  encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+                  ---> |      |      |      | LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      | <---
+                       `----------------------------------'  `----------------------------------'
+```
+
 
 ### Qwertz
 ```
