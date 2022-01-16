@@ -8,7 +8,7 @@ Instead you could also create and add your own logo.
 For that I have added a python script (`png_to_short_arr.py`) that you can use, to generate the arrays and diffs from your own images.  
 I also added the bongocat frames, that I have redrawn by hand in the folder [bongocat_frames](bongocat_frames)
 
-For an example of how to use it in your keymap look in [/kyria/keymaps/dakes/](/kyria/keymaps/dakes/)__
+For an example of how to use it in your keymap look in [/kyria/keymaps/dakes/](/kyria/keymaps/dakes/)
 
 ## How to draw your own images
 Any Image manipulation program will do, though I recommend Krita.  
@@ -55,10 +55,19 @@ Notes:
 # Hotswap Trackball
 With the bottom housing of a sacrificial switch, a few headers, standoffs and epoxy putty it is possible to make the pimoroni trackball hotswappable, like so:  
 
-<img src="/images/trackball_1.jpg" width="256" /> 
-<img src="/images/trackball_2.jpg" width="256" />  
-<img src="/images/trackball_3.jpg" width="256" /> 
-<img src="/images/trackball_4.jpg" width="256" />  
-<img src="/images/trackball_5.jpg" width="256" /> 
-<img src="/images/trackball_6.jpg" width="256" />  
-<img src="/images/trackball_7.jpg" width="256" /> 
+<p align="center">
+    <img  src="/images/trackball_1.jpg" width="23%">
+    &nbsp; &nbsp; &nbsp; 
+    <img src="/images/trackball_2.jpg" width="23%">
+    &nbsp; &nbsp; &nbsp;
+    <img src="/images/trackball_3.jpg" width="23%">
+    &nbsp; &nbsp; &nbsp;
+    <img src="/images/trackball_4.jpg" width="23%">
+</p>
+<p align="center">
+    <img src="/images/trackball_5.jpg" width="31%">
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <img src="/images/trackball_6.jpg" width="31%">
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <img src="/images/trackball_7.jpg" width="31%">
+</p>
