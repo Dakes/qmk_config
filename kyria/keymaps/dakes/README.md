@@ -10,8 +10,12 @@ On the Function Layer the encoders will cycle through the base layers. The curre
 
 For modular Bongocat, look in my [userspace](/userspace/dakes/).  
 
-<img src="/images/kyria_dakes_green.jpg" width="512" />
-<img src="/images/kyria_dakes_matcha.jpg" width="512" />  
+<p align="center">
+    <img  src="/images/kyria_dakes_green.jpg" width="45%">
+    &nbsp; &nbsp; &nbsp; 
+    <img src="/images/kyria_dakes_matcha.jpg" width="45%">
+</p>
+
 
 # Layers
 ## Layer 1: Base Layers

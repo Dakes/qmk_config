@@ -72,7 +72,7 @@
 #define DEBUG_MATRIX_SCAN_RATE
 
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 250
+#define TAPPING_TERM 225
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
@@ -81,7 +81,9 @@
 
 // Trackball
 // #define TRACKBALL_NO_MATH
-#define TRACKBALL_ANGLE_OFFSET 45
+#define TRACKBALL_ANGLE_OFFSET 0
 #define TRACKBALL_ORIENTATION 3
 #define TRACKBALL_REVERSE_HSCROLL false
 #define TRACKBALL_ACCELERATION_WINDOW 50000 // ms window to increase acceleration factor
+
+

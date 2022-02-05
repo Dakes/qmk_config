@@ -34,9 +34,14 @@
 #    include "modular_bongocat.h"
 #endif
 
+#ifdef CONWAY_ENABLE
+#    include "conway.h"
+#endif
+
 enum layers
 {
     _COLEMAK_DH = 0,
+    _TARMAK,
     _NEO,
     _QWERTZ,
     _GAMING,
@@ -45,8 +50,8 @@ enum layers
     _FUNC
 };
 
-uint8_t base_layers[4] = {_NEO, _COLEMAK_DH, _QWERTZ, _GAMING};
-uint8_t current_base_layer = _NEO;
+uint8_t base_layers[5] = {_COLEMAK_DH, _TARMAK, _NEO, _QWERTZ, _GAMING};
+uint8_t current_base_layer = _TARMAK;
 
 /*
 // Tap Dance declarations
@@ -64,26 +69,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /*
-    * Base Layer: Neo
-    *
-    * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |LAY3/tab|   X  |   V  |   L  | L3/C |   W  |                              |   K  | L3/H |   G  |   F  |   Q  |ß/AltGr |
-    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * | LShift |GUI/U |ALT/I |SHFT/A|STRG/E| L4/O |                              | L4/S |STRG/N|SHFT/R|ALT/T |GUI/D |Y/RShift|
-    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * | LCtrl  |   Ü  |   Ö  |   Ä  |   P  |   Z  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   B  |   M  | , ;  | . :  |   J  |-_ /RCtl|
-    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
-    *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
-    *                        `----------------------------------'  `----------------------------------'
-    */
-    [_NEO] = LAYOUT(
-            LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         LT(_LAYER_3, KC_C), KC_W,                                                              /**/                                             DE_K,               LT(_LAYER_3, KC_H), KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
-            KC_LSFT,              LGUI_T(KC_U), LALT_T(KC_I), LSFT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       RSFT_T(KC_R), LALT_T(KC_T), LGUI_T(KC_D), RSFT_T(DE_Y),
-            KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      KC_P,               DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               KC_M,               KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
-                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
-                    ),
 
     /*
     * Base Layer: Colemak-DH
@@ -107,6 +92,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     /*
+    * Base Layer: Neo
+    *
+    * ,-------------------------------------------.                              ,-------------------------------------------.
+    * |LAY3/tab|   X  |   V  |   L  | L3/C |   W  |                              |   K  | L3/H |   G  |   F  |   Q  |ß/AltGr |
+    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+    * | LShift |GUI/U |ALT/I |SHFT/A|STRG/E| L4/O |                              | L4/S |STRG/N|SHFT/R|ALT/T |GUI/D |Y/RShift|
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+    * | LCtrl  |   Ü  |   Ö  |   Ä  |   P  |   Z  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   B  |   M  | , ;  | . :  |   J  |-_ /RCtl|
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+    *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
+    *                        `----------------------------------'  `----------------------------------'
+    */
+    [_NEO] = LAYOUT(
+            LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         LT(_LAYER_3, KC_C), KC_W,                                                              /**/                                             DE_K,               LT(_LAYER_3, KC_H), KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
+            KC_LSFT,              LGUI_T(KC_U), LALT_T(KC_I), LSFT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       RSFT_T(KC_R), LALT_T(KC_T), LGUI_T(KC_D), RSFT_T(DE_Y),
+            KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      KC_P,               DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               KC_M,               KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
+                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
+    ),
+
+    /*
     * Base Layer: QWERTZ
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
@@ -124,6 +130,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_E,         LT(_LAYER_3, KC_R), KC_T,                                                           /**/                                             DE_Z,               LT(_LAYER_3, KC_U), KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
             KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_J),       RSFT_T(KC_K), LALT_T(KC_L), LGUI_T(DE_ODIA), RSFT_T(DE_ADIA),
             KC_LCTRL,             DE_Y,         KC_X,         KC_C,         KC_V,               KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_N,               KC_M,               KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
+                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
+    ),
+
+    /*
+    * Base Layer: Tarmak (Transitional Colemak) https://forum.colemak.com/topic/1858-learn-colemak-in-steps-with-the-tarmak-layouts/
+    *
+    * ,-------------------------------------------.                              ,-------------------------------------------.
+    * |LAY3/tab|   Q  |   W  |   F  | L3/R |   Z  |                              |   J  | L3/U |   I  |   O  |   P  |Ü/AltGr |
+    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+    * | LShift |GUI/A |ALT/S |SHFT/D|STRG/T| L4/G |                              | L4/H |STRG/N|SHFT/E|ALT/L |GUI/Ö |Ä/RShift|
+    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+    * | LCtrl  |   Y  |   X  |   C  |   V  |   B  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   K  |   M  | , ;  | . :  | - _  | ß/RCtl |
+    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
+    *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
+    *                        `----------------------------------'  `----------------------------------'
+    */
+    [_TARMAK] = LAYOUT(
+            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         LT(_LAYER_3, KC_R), DE_Z,                                                           /**/                                             KC_J,               LT(_LAYER_3, KC_U), KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
+            KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_N),       RSFT_T(KC_E), LALT_T(KC_L), LGUI_T(DE_ODIA), RSFT_T(DE_ADIA),
+            KC_LCTRL,             DE_Y,         KC_X,         KC_C,         KC_V,               KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               KC_M,               KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -237,13 +264,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+/*
 void keyboard_post_init_user(void) {
     // Customise these values to desired behaviour
-    debug_enable=true;
-    debug_matrix=true;
-    debug_keyboard=true;
+    debug_enable   = false;
+    debug_matrix   = false;
+    debug_keyboard = false;
     //debug_mouse=true;
 }
+*/
 
 
 // called on led status change
@@ -257,19 +286,25 @@ void led_set_keymap(uint8_t usb_led)
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
     // slim fake WPM
-    #if !defined(WPM_ENABLE) && defined(MODULAR_BONGOCAT_ENABLE)
+#   if !defined(WPM_ENABLE) && defined(MODULAR_BONGOCAT_ENABLE)
     bongo_fake_wpm_increment();
-    #endif
+#   endif
 
     numlock_off();
+
+#   ifdef CONWAY_ENABLE
+#   ifdef MASTER_HALF
+    conway_process_record_user(keycode, record);
+#   endif
+#   endif
     return true;
 }
 
 void matrix_scan_user(void)
 {
-    #if !defined(WPM_ENABLE) && defined(MODULAR_BONGOCAT_ENABLE)
+#   if !defined(WPM_ENABLE) && defined(MODULAR_BONGOCAT_ENABLE)
     bongo_fake_wpm_decay();
-    #endif
+#   endif
 }
 
 layer_state_t layer_state_set_user(layer_state_t state)
@@ -379,6 +414,7 @@ void pointing_device_task() {
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK_DH:
         case _NEO:
+        case _TARMAK:
         case _QWERTZ:
             trackball_set_rgbw(0, 200, 0, 0);
             break;
@@ -403,7 +439,7 @@ void pointing_device_task() {
     pointing_device_set_report(mouse_report);
     pointing_device_send();
 }
-#endif
+#endif  // PIMORONI_TRACKBALL_ENABLEi
 
 
 #if defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
@@ -414,6 +450,21 @@ void pointing_device_task() {
 oled_rotation_t oled_init_user(oled_rotation_t rotation)
 {
 	return OLED_ROTATION_180;
+}
+
+#ifndef CONWAY_RENDER
+static void render_current_layer(void)
+{
+    if(current_base_layer == _NEO)
+        oled_write_P(PSTR("Neo\n"), false);
+    else if(current_base_layer == _COLEMAK_DH)
+        oled_write_P(PSTR("Colemak-DH\n"), false);
+    else if(current_base_layer == _TARMAK)
+        oled_write_P(PSTR("Tarmak\n"), false);
+    else if(current_base_layer == _QWERTZ)
+        oled_write_P(PSTR("Qwertz\n"), false);
+    else if (current_base_layer == _GAMING)
+        oled_write_P(PSTR("Gaming\n"), false);
 }
 
 /**
@@ -436,14 +487,7 @@ static bool render_status(void)
     else
     {
         oled_write_P(PSTR("New Base: "), false);
-        if(current_base_layer == _NEO)
-            oled_write_P(PSTR("Neo\n"), false);
-        else if(current_base_layer == _COLEMAK_DH)
-            oled_write_P(PSTR("Colemak-DH\n"), false);
-        else if(current_base_layer == _QWERTZ)
-            oled_write_P(PSTR("Qwertz\n"), false);
-        else if(current_base_layer == _GAMING)
-            oled_write_P(PSTR("Gaming\n"), false);
+        render_current_layer();
         scroll_timer = 0;
     }
 
@@ -466,14 +510,7 @@ static bool render_status(void)
     }
     else
     {
-        if(current_base_layer == _NEO)
-            oled_write_P(PSTR("Neo\n"), false);
-        else if(current_base_layer == _COLEMAK_DH)
-            oled_write_P(PSTR("Colemak-DH\n"), false);
-        else if(current_base_layer == _QWERTZ)
-            oled_write_P(PSTR("Qwertz\n"), false);
-        else if (current_base_layer == _GAMING)
-            oled_write_P(PSTR("Gaming\n"), false);
+        render_current_layer();
     }
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
@@ -490,16 +527,16 @@ static bool render_status(void)
         return true;
 }
 
-void oled_task_user(void)
+bool oled_task_user(void)
 {
 
     #if defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
     static bool logos_rendered = false;
-    // BONGO_DEBUG renders bongocat on master, to debug without having to reattach the USB cable all the time
-    #ifdef BONGO_DEBUG
+    // SLAVE_DEBUG renders slave on master, to debug without having to reattach the USB cable all the time
+    #ifdef SLAVE_DEBUG
     if (!is_keyboard_master())
     #endif
-    #ifndef BONGO_DEBUG
+    #ifndef SLAVE_DEBUG
     // normal case
     if (is_keyboard_master())
     #endif
@@ -530,15 +567,17 @@ void oled_task_user(void)
         #ifdef WPM_ENABLE
         render_wpm();
         #endif
-        #endif
+        #endif        
         #ifndef MODULAR_BONGOCAT_ENABLE
-        render_status();
-        oled_scroll_left();
+        /* render_status();
+        oled_scroll_left(); */
         #endif
-
     }
 
-    #endif
+    #endif // defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
+    return false;
 }
+#endif // CONWAY_ENABLE
 
-#endif
+
+#endif // defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
