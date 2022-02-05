@@ -52,11 +52,66 @@ Notes:
 - You could remove `#include <stdio.h>` from Pierre Chevalier's bongo_light and replace `sprintf` by my method of rendering the WPM String 
   to save additional ~1200 bytes. 
 
+# Conway's Game of Life
+This is the famous Conway's Game of Life designed to run on split keyboards with OLEDs of the size 128x64.  
+With minor modifications, it should work on other keyboards and screensizes as well.  
+
+## How to add it to your keymap
+copy `conway.c` and `conway.h` to your own userspace (qmk_firmware/users/*your_name*/).  
+Add 
+```C
+# ifdef CONWAY_ENABLE
+#define SPLIT_TRANSACTION_IDS_USER CONWAY_SYNC
+# endif
+``` 
+this from `config.h` to your userspace `config.h`.  
+Copy all Code from `rules.mk` regarding conway to your own userspace `rules.mk` (Marked with comments)  
+The functions `process_record_user`, `keyboard_post_init_user`, `housekeeping_task_user` in `conway.c` use the weak attribute, so if you use those in your own keymap, you have to copy their code to your own keymaps functions. (Only one function call each. )
+
+## Customization
+There are numerous customizations possible, in `rules.mk` and `conway.h`
+### rules.mk
+Since they are defined with `?=` you can just copy these to your keymap `rules.mk` to define them there, or change them in the userspace `rules.mk` directly.  
+`MASTER_HALF ?= yes`: The master and slave half require different code, to conserve firmware size. Select here for which half to compile.  
+`CONWAY_ENABLE ?= yes`: Switch conway on or off. (For both master and slave)  
+`CONWAY_MASTER ?= no`: Put conway onto the master, or slave.  
+
+`KYRIA_MATRIX_FIX ?= yes`: Fix kyria / split keyboard matrix. Spawn points of right half to the right. For other split kbs, other than the SplitKb Kyria™ you may want to adjust the corresponding code. Or just disable it.  
+`EGDE_KILL ?= yes`: Kill live cells, that are on the edge.  
+`HELD_SPAWN ?= yes`: If keys are held for a longer time (adjustable in conway.h). More cells will be toggled at random, in a radius of 1, 2 or 3.  
+
+### conway.h
+
+This is the position, where new points, depending on keypresses will be spawned in. 
+```C
+#define MATRIX_POS_X 24
+#define MATRIX_POS_Y 22
+```
+
+This is the time, that has to pass for held down keys, to spawn in more points in a radius of 1, 2 and 3
+```C
+#define SPAWN_INTERVAL_1 250
+#define SPAWN_INTERVAL_2 2000
+#define SPAWN_INTERVAL_3 4000
+```
+
+`#define GOSPER_GLIDER_GUN 3, 1`: Whether to add a Gosper Glider gun (generator) and the x, y position where to add it. (Comment out to disable).  
+`#define BEACON 55, 10`: Whether to add a Beacon at the given coordinates.  
+Please modify the code directly, if you want to add more than one of those. Just add another call to `gosper_glider_gun(field, x, y);` with your desired coordinates.  
+
+### conway.c
+If you want to add your own structures, that will be shown after boot up, use the `SET_CELL(field[x], y);` macro in the `conway()` function in `if (structures_set == false)`.  
+Or even better, create your own function, like `beacon(field, x, y)` or `gosper_glider_gun(field, x, y)`. That way you can add multiple copies, in different locations. 
+
+## Building
+Unfortunately you have to change `MASTER_HALF ?= yes` every time, you compile it for the other half. (Otherwise the firmware was just too big for me)
+
+
 # Hotswap Trackball
 With the bottom housing of a sacrificial switch, a few headers, standoffs and epoxy putty it is possible to make the pimoroni trackball hotswappable, like so:  
 
 <p align="center">
-    <img  src="/images/trackball_1.jpg" width="23%">
+    <img src="/images/trackball_1.jpg" width="23%">
     &nbsp; &nbsp; &nbsp; 
     <img src="/images/trackball_2.jpg" width="23%">
     &nbsp; &nbsp; &nbsp;
