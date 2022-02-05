@@ -118,6 +118,14 @@ void advance_prev_state(uint32_t field[WC], uint32_t prev_state[2], uint8_t idx_
 void step(uint32_t field[WC])
 {
     static uint8_t x = 1;
+
+    // render current column, before advancing game, to display just toggled single live cells
+    render_column(field, x);
+    if (x == 1)
+        render_column(field, 0);
+    else if (x >= WC-1)
+        render_column(field, WC);
+
     // tmp array to compute the new game state
     // previous state for this slice will be copied into it
     static uint32_t prev_state[2] = {};
@@ -157,12 +165,7 @@ void step(uint32_t field[WC])
             CLR_CELL(field[x], y);
     }
 
-    render_column(field, x);
-    if (x == 1)
-        render_column(field, 0);
-    else if (x >= WC-1)
-        render_column(field, WC);
-
+    
     if (x<WC-1)
     {
         advance_prev_state(field, prev_state, x);
