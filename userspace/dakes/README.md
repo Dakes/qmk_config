@@ -55,6 +55,7 @@ Notes:
 # Conway's Game of Life
 This is the famous Conway's Game of Life designed to run on split keyboards with OLEDs of the size 128x64.  
 With minor modifications, it should work on other keyboards and screensizes as well.  
+Look here for a demonstration: [Conway's Game of Life for QMK running on a 128x64 OLED](https://www.youtube.com/watch?v=1h1coIJXcSQ)  
 
 ## How to add it to your keymap
 copy `conway.c` and `conway.h` to your own userspace (qmk_firmware/users/*your_name*/).  

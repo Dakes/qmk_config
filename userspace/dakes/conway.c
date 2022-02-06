@@ -363,11 +363,6 @@ void conway_process_record_user(uint16_t keycode, keyrecord_t *record)
     if (is_keyboard_master())
     {
         conway_spawn_coordinates csc = conway_calc_spawn_pos(keycode, record);
-        // Interact with slave every 10ms
-        /* static uint32_t last_sync = 0; */
-        /* if (timer_elapsed32(last_sync) > 10) */
-        /*     if(transaction_rpc_send(CONWAY_SYNC, sizeof(csc), &csc)) */
-        /*         last_sync = timer_read32(); */
         transaction_rpc_send(CONWAY_SYNC, sizeof(csc), &csc);
     }
 #   endif
