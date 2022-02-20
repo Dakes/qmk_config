@@ -1,0 +1,31 @@
+OLED_DRIVER_ENABLE = no   # Enables the use of OLED displays
+ENCODER_ENABLE = no       # Enables the use of one or more encoders
+RGBLIGHT_ENABLE = no       # Enable keyboard RGB underglow
+UNICODEMAP_ENABLE = no
+TAP_DANCE_ENABLE = no
+WPM_ENABLE = no
+NO_USB_STARTUP_CHECK = no
+
+
+# EXTRAFLAGS += -flto
+
+# debugging output
+CONSOLE_ENABLE = no
+
+MOUSEKEY_ENABLE = yes
+STENO_ENABLE = no
+BOOTMAGIC_ENABLE = yes
+TERMINAL_ENABLE = no
+GRAVE_ESC_ENABLE = no
+MAGIC_ENABLE = yes
+SPACE_CADET_ENABLE = no
+KEY_LOCK_ENABLE = no
+AUDIO_ENABLE = no
+VELOCIKEY_ENABLE = no
+
+MIDI_ENABLE = no
+UNICODE_ENABLE = no
+BLUETOOTH_ENABLE = no
+FAUXCLICKY_ENABLE = no
+HD44780_ENABLE = no
+NKRO_ENABLE = yes
