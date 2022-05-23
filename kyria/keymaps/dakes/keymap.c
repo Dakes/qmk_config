@@ -41,7 +41,6 @@
 enum layers
 {
     _COLEMAK_DH = 0,
-    _TARMAK,
     _NEO,
     _QWERTZ,
     _GAMING,
@@ -50,8 +49,9 @@ enum layers
     _FUNC
 };
 
-uint8_t base_layers[5] = {_COLEMAK_DH, _TARMAK, _NEO, _QWERTZ, _GAMING};
-uint8_t current_base_layer = _TARMAK;
+
+uint8_t base_layers[5] = {_COLEMAK_DH, _NEO, _QWERTZ, _GAMING};
+uint8_t current_base_layer = _COLEMAK_DH;
 
 /*
 // Tap Dance declarations
@@ -74,41 +74,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Base Layer: Colemak-DH
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |LAY3/tab|   Q  |   W  |   F  | L3/P |   B  |                              |   J  | L3/L |   U  |   Y  |   Ö  |Ü/AltGr |
+    * |LAY3/tab|   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  |   Ö  |Ü/AltGr |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * | LShift |GUI/A |ALT/R |SHFT/S|STRG/T| L4/G |                              | L4/M |STRG/N|SHFT/E|ALT/I |GUI/O |Ä/RShift|
+    * | LShift |SHFT/A|GUI/R | ALT/S|STRG/T| L4/G |                              | L4/M |STRG/N| ALT/E|GUI/I |SHFT/O|Ä/RShift|
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * | LCtrl  |   Z  |   X  |   C  |   D  |   V  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   K  |   H  | , ;  | . :  |  - _ | ß/RCtl |
+    * | LCtrl  |   Z  |   X  |   C  | L3/D  |   V  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   K  | L3/H  | , ;  | . :  |  - _ | ß/RCtl |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
     *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_COLEMAK_DH] = LAYOUT(
-            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         LT(_LAYER_3, KC_P), KC_B,                                                              /**/                                             DE_J,               LT(_LAYER_3, KC_L), KC_U,         DE_Y,         DE_ODIA,      ALGR_T(DE_UDIA),
-            KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_R), LSFT_T(KC_S), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                                /**/                                             LT(_LAYER_4, KC_M), LCTL_T(KC_N),       RSFT_T(KC_E), LALT_T(KC_I), LGUI_T(KC_O), RSFT_T(DE_ADIA),
-            KC_LCTRL,             DE_Z,         KC_X,         KC_C,         KC_D,               KC_V,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               KC_H,               KC_COMM,      KC_DOT,       DE_MINS,      RCTL_T(DE_SS),
-                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
+            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         KC_P,               KC_B,                                                                 /**/                                             DE_J,               KC_L,               KC_U,         DE_Y,         DE_ODIA,      ALGR_T(DE_UDIA),
+            KC_LSFT,              LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                                   /**/                                             LT(_LAYER_4, KC_M), LCTL_T(KC_N),       LALT_T(KC_E), LGUI_T(KC_I), RSFT_T(KC_O), RSFT_T(DE_ADIA),
+            KC_LCTRL,             DE_Z,         KC_X,         KC_C,         LT(_LAYER_3, KC_D), KC_V,               LT(_LAYER_4, KC_ESCAPE), LT(_LAYER_3, KC_ESCAPE), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               LT(_LAYER_3, KC_H), KC_COMM,      KC_DOT,       DE_MINS,      RCTL_T(DE_SS),
+                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT),    /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
     /*
     * Base Layer: Neo
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |LAY3/tab|   X  |   V  |   L  | L3/C |   W  |                              |   K  | L3/H |   G  |   F  |   Q  |ß/AltGr |
+    * |LAY3/tab|   X  |   V  |   L  |  C   |   W  |                              |   K  |  H   |   G  |   F  |   Q  |ß/AltGr |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * | LShift |GUI/U |ALT/I |SHFT/A|STRG/E| L4/O |                              | L4/S |STRG/N|SHFT/R|ALT/T |GUI/D |Y/RShift|
+    * | LShift |SHFT/U|GUI/I | ALT/A|STRG/E| L4/O |                              | L4/S |STRG/N| ALT/R|GUI/T |SHFT/D|Y/RShift|
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * | LCtrl  |   Ü  |   Ö  |   Ä  |   P  |   Z  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   B  |   M  | , ;  | . :  |   J  |-_ /RCtl|
+    * | LCtrl  |   Ü  |   Ö  |   Ä  | L3/P |   Z  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   B  | L3/M | , ;  | . :  |   J  |-_ /RCtl|
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
     *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_NEO] = LAYOUT(
-            LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         LT(_LAYER_3, KC_C), KC_W,                                                              /**/                                             DE_K,               LT(_LAYER_3, KC_H), KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
-            KC_LSFT,              LGUI_T(KC_U), LALT_T(KC_I), LSFT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       RSFT_T(KC_R), LALT_T(KC_T), LGUI_T(KC_D), RSFT_T(DE_Y),
-            KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      KC_P,               DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               KC_M,               KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
+            LT(_LAYER_3, KC_TAB), KC_X,         KC_V,         KC_L,         KC_C,               KC_W,                                                              /**/                                             DE_K,               KC_H,               KC_G,         KC_F,         KC_Q,         ALGR_T(DE_SS),
+            KC_LSFT,              LSFT_T(KC_U), LGUI_T(KC_I), LALT_T(KC_A), LCTL_T(KC_E),       LT(_LAYER_4, KC_O),                                                /**/                                             LT(_LAYER_4, KC_S), LCTL_T(KC_N),       LALT_T(KC_R), LGUI_T(KC_T), LSFT_T(KC_D), RSFT_T(DE_Y),
+            KC_LCTRL,             DE_UDIA,      DE_ODIA,      DE_ADIA,      LT(_LAYER_3, KC_P), DE_Z,               LT(_LAYER_4, KC_ESCAPE), MO(_LAYER_3),         /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_B,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       KC_J,         RCTL_T(DE_MINS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC),    LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
@@ -116,63 +116,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * Base Layer: QWERTZ
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |LAY3/tab|   Q  |   W  |   E  | L3/R |   T  |                              |   Z  | L3/U |   I  |   O  |   P  |Ü/AltGr |
+    * |LAY3/tab|   Q  |   W  |   E  |  R   |   T  |                              |   Z  |  U   |   I  |   O  |   P  |Ü/AltGr |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * | LShift |GUI/A |ALT/S |SHFT/D|STRG/F| L4/G |                              | L4/H |STRG/J|SHFT/K|ALT/L |GUI/Ö |Ä/RShift|
+    * | LShift |SHFT/A|GUI/S |ALT/D |STRG/F| L4/G |                              | L4/H |STRG/J| ALT/K| GUI/L|SHFT/Ö|Ä/RShift|
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * | LCtrl  |   Y  |   X  |   C  |   V  |   B  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
+    * | LCtrl  |   Y  |   X  |   C  | L3/V |   B  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   N  | L3/M | , ;  | . :  | - _  | ß/RCtl |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
     *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_QWERTZ] = LAYOUT(
-            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_E,         LT(_LAYER_3, KC_R), KC_T,                                                           /**/                                             DE_Z,               LT(_LAYER_3, KC_U), KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
-            KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_J),       RSFT_T(KC_K), LALT_T(KC_L), LGUI_T(DE_ODIA), RSFT_T(DE_ADIA),
-            KC_LCTRL,             DE_Y,         KC_X,         KC_C,         KC_V,               KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_N,               KC_M,               KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
+            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_E,         KC_R,               KC_T,                                                           /**/                                             DE_Z,               KC_U,               KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
+            KC_LSFT,              LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_J),       LALT_T(KC_K), LGUI_T(KC_L), RSFT_T(DE_ODIA), RSFT_T(DE_ADIA),
+            KC_LCTRL,             DE_Y,         KC_X,         KC_C,         LT(_LAYER_3, KC_V), KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_N,               LT(_LAYER_3, KC_M), KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
                                                               KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
     ),
 
-    /*
-    * Base Layer: Tarmak (Transitional Colemak) https://forum.colemak.com/topic/1858-learn-colemak-in-steps-with-the-tarmak-layouts/
-    *
-    * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |LAY3/tab|   Q  |   W  |   F  | L3/R |   Z  |                              |   J  | L3/U |   I  |   O  |   P  |Ü/AltGr |
-    * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * | LShift |GUI/A |ALT/S |SHFT/D|STRG/T| L4/G |                              | L4/H |STRG/N|SHFT/E|ALT/L |GUI/Ö |Ä/RShift|
-    * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * | LCtrl  |   Y  |   X  |   C  |   V  |   B  |L3/ESC|L4/ESC|  |L4/F5 |L3/F5 |   K  |   M  | , ;  | . :  | - _  | ß/RCtl |
-    * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-    *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
-    *                        |      |      | SHIFT| LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      |
-    *                        `----------------------------------'  `----------------------------------'
-    */
-    [_TARMAK] = LAYOUT(
-            LT(_LAYER_3, KC_TAB), KC_Q,         KC_W,         KC_F,         LT(_LAYER_3, KC_R), DE_Z,                                                           /**/                                             KC_J,               LT(_LAYER_3, KC_U), KC_I,         KC_O,         KC_P,            ALGR_T(DE_UDIA),
-            KC_LSFT,              LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_T),       LT(_LAYER_4, KC_G),                                             /**/                                             LT(_LAYER_4, KC_H), LCTL_T(KC_N),       RSFT_T(KC_E), LALT_T(KC_L), LGUI_T(DE_ODIA), RSFT_T(DE_ADIA),
-            KC_LCTRL,             DE_Y,         KC_X,         KC_C,         KC_V,               KC_B,               LT(_LAYER_4, KC_ESC), LT(_LAYER_3, KC_ESC), /**/ LT(_LAYER_4, KC_F5),  LT(_LAYER_3, KC_F5),  KC_K,               KC_M,               KC_COMM,      KC_DOT,       DE_MINS,         RCTL_T(DE_SS),
-                                                              KC_MPLY,      KC_LGUI,            KC_LALT,            LT(_LAYER_3, KC_SPC), LT(_LAYER_4, KC_ENT), /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,            KC_DEL,             KC_MUTE
-    ),
 
     /*
-    * Base Layer: Gaming, Overwatch
+    * Base Layer: Gaming, Overwatch, Isaac
     *
     * ,-------------------------------------------.                              ,-------------------------------------------.
-    * |  tab   |   Q  |   Q  |   2  |   E  |   F  |                              |   Z  |   U  |   I  |   O  |   P  |Ü/AltGr |
+    * |  tab   |   Q  |   A  |   W  |   D  |   E  |                              |   Z  | left |   up | right|   P  |Ü/AltGr |
     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-    * |    X   |LShift|   A  |   W  |   D  |   R  |                              |   H  |   J  |   K  |   L  |   Ö  |Ä/RShift|
+    * |    X   |LShift|   A  |   S  |   D  |   R  |                              |   H  | left | down | right|   Ö  |Ä/RShift|
     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-    * |    Y   |LShift|   C  |   S  |   V  |   B  |  esc | LAY6 |  | LAY5 |L6/F5 |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
+    * |    Y   |LCtrl |   X  |   C  |   V  |   F  |  esc | esc  |  | LAY5 | FUNC |   N  |   M  | , ;  | . :  | - _  | ß/RCtl |
     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
     *   encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
-    *                        |      |      |      |      |      |  | LAY3 | LAY4 |      |      |      |
+    *                        |      |      |      | SYM  |NAVNUM|  | SYM  |NAVNUM|      |      |      |
     *                        `----------------------------------'  `----------------------------------'
     */
     [_GAMING] = LAYOUT(
-            KC_TAB,   KC_Q,   KC_Q,   KC_2,   KC_E,   KC_F,                         /**/                                    DE_Z, KC_U, KC_I,    KC_O,    KC_P,    ALGR_T(DE_UDIA),
-            KC_X,  KC_LSFT,   KC_A,   KC_W,   KC_D,   KC_R,                         /**/                                    KC_H, KC_J, KC_K,    KC_L,    DE_ODIA, RSFT_T(DE_ADIA),
-            KC_Y, KC_LCTRL,   KC_C,   KC_S,   KC_V,   KC_B, KC_ESCAPE, MO(_LAYER_4),/**/ MO(_LAYER_4), LT(_LAYER_4, KC_F5), KC_N, KC_M, KC_COMM, KC_DOT,  DE_MINS, RCTL_T(DE_SS),
-                                   KC_MPLY, KC_LGUI, KC_LALT, KC_SPC      , KC_ENT, /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL, KC_MUTE
+            KC_TAB,   KC_Q,   KC_A,   KC_W,   KC_D,   KC_E,                         /**/                                             DE_Z,     KC_LEFT, KC_UP,   KC_RIGHT, KC_P,    ALGR_T(DE_UDIA),
+            KC_X,  KC_LSFT,   KC_A,   KC_S,   KC_D,   KC_R,                         /**/                                             KC_H,     KC_LEFT, KC_DOWN, KC_RIGHT, DE_ODIA, RSFT_T(DE_ADIA),
+            KC_Y, KC_LCTRL,   KC_X,   KC_C,   KC_V,   KC_F, KC_ESCAPE, KC_ESCAPE,   /**/ MO(_FUNC),         LT(_LAYER_3, KC_F5),  KC_N,     KC_M,    KC_COMM, KC_DOT,   DE_MINS, RCTL_T(DE_SS),
+                                   KC_MPLY, KC_LGUI, KC_LALT, KC_SPC      , KC_ENT, /**/ LT(_LAYER_3, KC_ENT), LT(_LAYER_4, KC_SPC), KC_BSPC,  KC_DEL,  KC_MUTE
     ),
 
     /*
@@ -190,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_3] = LAYOUT(
-        _______, DE_DEG, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                                     DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, DE_SECT,
+        _______, DE_DEG, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC,                                      DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR, DE_SECT,
         _______, DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR,                                     DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN, DE_AT,
         _______, DE_HASH, DE_DLR,  DE_PIPE, DE_TILD, DE_GRV , _______, _______, _______, _______, DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN, DE_EURO,
                                   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -211,10 +191,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                        `----------------------------------'  `----------------------------------'
     */
     [_LAYER_4] = LAYOUT(
-        KC_ESCAPE, KC_PGUP,   KC_BSPC, KC_UP,     KC_DELETE, KC_PGDOWN,                   /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
-        _______,   KC_HOME,   KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                      /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
-        _______,   KC_ESCAPE, KC_TAB,  KC_INSERT, KC_BTN1,   KC_MS_U,   KC_MS_R, _______, /**/ _______, _______, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
-                                       _______,   KC_BTN2,   KC_MS_L,   KC_MS_D, _______, /**/ _______, KC_0,    _______, _______, _______
+        KC_ESCAPE, KC_PGUP, KC_BSPC, KC_UP,     KC_DELETE, KC_PGDOWN,                   /**/                   DE_ASTR, KC_7, KC_8, KC_9, DE_PLUS, DE_MINS,
+        _______,   KC_HOME, KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,                      /**/                   DE_SLSH, KC_4, KC_5, KC_6, KC_DOT,  DE_SCLN,
+        _______,   KC_ESC,  KC_TAB,  KC_INSERT, KC_BTN1,   KC_MS_U,   KC_MS_R, _______, /**/ _______, _______, DE_COLN, KC_1, KC_2, KC_3, KC_COMM, DE_EQL,
+                                       _______, KC_BTN2,   KC_MS_L,   KC_MS_D, _______, /**/ _______, KC_0,    _______, _______, _______
     ),
 
 
@@ -294,17 +274,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 
 #   ifdef CONWAY_ENABLE
 #   ifdef MASTER_HALF
-    conway_process_record_user(keycode, record);
+        conway_process_record_user(keycode, record);
 #   endif
 #   endif
+
     return true;
 }
+
 
 void matrix_scan_user(void)
 {
 #   if !defined(WPM_ENABLE) && defined(MODULAR_BONGOCAT_ENABLE)
     bongo_fake_wpm_decay();
 #   endif
+
+
 }
 
 layer_state_t layer_state_set_user(layer_state_t state)
@@ -414,7 +398,6 @@ void pointing_device_task() {
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK_DH:
         case _NEO:
-        case _TARMAK:
         case _QWERTZ:
             trackball_set_rgbw(0, 200, 0, 0);
             break;
@@ -459,8 +442,6 @@ static void render_current_layer(void)
         oled_write_P(PSTR("Neo\n"), false);
     else if(current_base_layer == _COLEMAK_DH)
         oled_write_P(PSTR("Colemak-DH\n"), false);
-    else if(current_base_layer == _TARMAK)
-        oled_write_P(PSTR("Tarmak\n"), false);
     else if(current_base_layer == _QWERTZ)
         oled_write_P(PSTR("Qwertz\n"), false);
     else if (current_base_layer == _GAMING)
@@ -515,8 +496,9 @@ static bool render_status(void)
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("      "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("      "), false);
+
 
     if (scroll_timer < 255)
         scroll_timer++;
