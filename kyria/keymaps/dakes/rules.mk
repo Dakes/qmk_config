@@ -5,7 +5,9 @@ UNICODEMAP_ENABLE = no
 TAP_DANCE_ENABLE = no
 WPM_ENABLE = no
 NO_USB_STARTUP_CHECK = yes
-
+COMBO_ENABLE = yes
+CAPS_WORD_ENABLE = yes
+ENCODER_MAP_ENABLE = no
 
 # EXTRAFLAGS += -flto
 
@@ -39,19 +41,23 @@ MASTER_HALF = yes
 ifeq ($(strip $(MASTER_HALF)), yes)
 
 endif
-MOUSEKEY_ENABLE = yes
-# enable (yes) only on the side with the trackball
-PIMORONI_TRACKBALL_ENABLE = yes
-TRACKBALL_MASTER = yes
-# disable on other half
-ifeq ($(strip $(MASTER_HALF)), no)
-    ifeq ($(strip $(TRACKBALL_MASTER)), yes)
-        PIMORONI_TRACKBALL_ENABLE = no
-    endif
-else ifeq ($(strip $(MASTER_HALF)), yes)
-    ifeq ($(strip $(TRACKBALL_MASTER)), no)
-        PIMORONI_TRACKBALL_ENABLE = no
-    endif
+
+
+
+### Trackball ###
+POINTING_DEVICE_ENABLE = yes
+
+ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
+    POINTING_DEVICE_DRIVER = pimoroni_trackball
+    POINTING_DEVICE_RIGHT = yes
+
+    MOUSEKEY_ENABLE = yes
+    SPLIT_POINTING_ENABLE = yes
+    PIMORONI_TRACKBALL_ADDRESS = 0x0A
+    POINTING_DEVICE_ROTATION_180 = yes
+
+    PIMORONI_TRACKBALL_SCALE = 2
+
 endif
 
 
@@ -63,7 +69,7 @@ SLAVE_DEBUG = no
 CONWAY_ENABLE = yes
 CONWAY_MASTER = no
 # if pimoroni is disabled (right half?), enough space is available for animations
-ifeq ($(strip $(PIMORONI_TRACKBALL_ENABLE)), no)
+ifeq ($(strip $(POINTING_DEVICE_ENABLE)), no)
     # MODULAR_BONGOCAT_ENABLE = yes
     # QMK_LOGO_ENABLE = yes
     # KYRIA_LOGO_ENABLE = yes
@@ -72,8 +78,6 @@ ifeq ($(strip $(PIMORONI_TRACKBALL_ENABLE)), no)
 else
     # CONWAY_MASTER = no
 endif
-
-CONWAY_MASTER = no
 
 MODULAR_BONGOCAT_ENABLE ?= no
 QMK_LOGO_ENABLE ?= no

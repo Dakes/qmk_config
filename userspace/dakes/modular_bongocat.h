@@ -2,6 +2,10 @@
 #pragma once
 #include <string.h>
 
+#ifndef WIDTH
+#define WIDTH 128
+#endif
+
 void bongo_fake_wpm_increment(void);
 void bongo_fake_wpm_decay(void);
 

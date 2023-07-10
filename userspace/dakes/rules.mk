@@ -44,7 +44,7 @@ endif
 MASTER_HALF ?= yes
 
 # Enable Conway?
-CONWAY_ENABLE ?= yes
+CONWAY_ENABLE ?= no
 # Run conway on master?
 CONWAY_MASTER ?= no
 

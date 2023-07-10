@@ -20,21 +20,6 @@ For modular Bongocat, look in my [userspace](/userspace/dakes/).
 # Layers
 ## Layer 1: Base Layers
 
-### Neo
-https://neo-layout.org/
-```
-,-------------------------------------------.                              ,-------------------------------------------.
-|LAY3/tab|   X  |   V  |   L  | L3/C |   W  |                              |   K  | L3/H |   G  |   F  |   Q  |ß/AltGr |
-|--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-| LShift |U/GUI |I/ALT |A/SHFT|E/STRG| L4/O |                              | L4/S |N/STRG|R/SHFT|T/ALT |D/GUI |Y/RShift|
-|--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-| LCtrl  |   Ü  |   Ö  |   Ä  |   P  |   Z  |L4/ESC|L3/ESC|  |L4/F5 |L3/F5 |   B  |   M  | , ;  | . :  |   J  |-_ /RCtl|
-`----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-  encoder: skip tracks | Play | GUI  | LALT | Space| Enter|  | Enter| Space| Bksp | Del  | Mute | encoder: volume
-                  ---> |      |      |      | LAY3 | LAY4 |  | LAY3 | LAY4 |      |      |      | <---
-                       `----------------------------------'  `----------------------------------'
-```
-
 ### Colemak-DH
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
@@ -69,10 +54,8 @@ https://neo-layout.org/
 ### Gaming
 *In development*
 
-### Layer 2: shift layer
-Same as Layer 1, activated with shift. (default shift)
 
-## Layer 3: Symbols
+## Layer 2: Symbols
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
 |        |   °  |   _  |   [  |   ]  |   ^  |                              |   !  |   <  |   >  |   =  |   &  |   §    |
@@ -86,7 +69,7 @@ Same as Layer 1, activated with shift. (default shift)
                        `----------------------------------'  `----------------------------------'
 ```
 
-## Layer 4: Navigation and Numpad
+## Layer 3: Navigation and Numpad
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
 |   esc  | PgUp | Bksp |  up  | del  | PgDn |                              |   *  |   7  |   8  |   9  |   +  |   -    |
@@ -101,7 +84,7 @@ Same as Layer 1, activated with shift. (default shift)
 ```
 
 
-## Function Layer: F-keys, RGB control and media buttons
+## Layer 4: Function Layer: F-keys, RGB control and media buttons
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
 |        |      |      |      |BRI DN|BRI UP|                              |      |  F7  |  F8  |  F9  | F10  |  F11   |

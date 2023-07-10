@@ -6,8 +6,6 @@
 // #ifdef OLED_DRIVER_ENABLE
 #if defined(OLED_ENABLE) || defined(OLED_DRIVER_ENABLE)
 
-#define WIDTH 128
-
 // fake WPM
 #if !defined WPM_ENABLE
 

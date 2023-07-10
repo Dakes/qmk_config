@@ -18,6 +18,8 @@
 
 #define MASTER_LEFT
 
+#define LAYER_STATE_8BIT
+
 #ifdef OLED_DRIVER_ENABLE
     #define OLED_DISPLAY_128X64
     #define OLED_TIMEOUT 90000
@@ -72,14 +74,19 @@
 #define DEBUG_MATRIX_SCAN_RATE
 
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 190
-// Prevent normal rollover on alphas from accidentally triggering mods.
-#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM 200
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
 
+// Combos
+/* #define COMBO_COUNT 2 */
+#define COMBO_TERM 15
+#define COMBO_MUST_TAP_PER_COMBO
 
-// Trackball
+#define POINTING_DEVICE_RIGHT
+#define SPLIT_POINTING_ENABLE
+
+// Trackball legacy
 // #define TRACKBALL_NO_MATH
 #define TRACKBALL_ANGLE_OFFSET 0
 #define TRACKBALL_ORIENTATION 3

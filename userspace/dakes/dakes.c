@@ -9,6 +9,6 @@ void numlock_off(void)
     led_t led_state = host_keyboard_led_state();
     if (led_state.num_lock)
     {
-        tap_code16(KC_NLCK);
+        tap_code16(KC_NUM);
     }
 }
