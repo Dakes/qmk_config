@@ -87,18 +87,18 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_COLEMAK_DH] = LAYOUT(
-	    KC_Q,         KC_W,         KC_F,         KC_P,         KC_B, /**/ KC_J, KC_L,         KC_U,         DE_Y,         DE_Z,
+        KC_Q,         KC_W,         KC_F,         KC_P,         KC_B, /**/ KC_J, KC_L,         KC_U,         DE_Y,         DE_Z,
         LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T), KC_G, /**/ KC_M, LCTL_T(KC_N), LALT_T(KC_E), LGUI_T(KC_I), RSFT_T(KC_O),
-		QK_REP,       KC_X,         KC_C,         KC_D,         KC_V, /**/ DE_K, KC_H,         KC_COMM,      KC_DOT,       DE_MINS,
-		#ifdef TWO_2U
-		KC_ESC, OSM(MOD_LALT), KC_LGUI, LT(_NAV_NUM, KC_ENT), _______, /**/ _______, LT(_SYM, KC_SPC), KC_BSPC, KC_DEL, OSM(MOD_LCTL)
+        QK_REP,       KC_X,         KC_C,         KC_D,         KC_V, /**/ DE_K, KC_H,         KC_COMM,      KC_DOT,       DE_MINS,
+        #ifdef TWO_2U
+        KC_ESC, OSM(MOD_LALT), KC_LGUI, LT(_NAV_NUM, KC_ENT), _______, /**/ _______, LT(_SYM, KC_SPC), KC_BSPC, KC_DEL, OSM(MOD_LCTL)
         #endif
     ),
 
     [_SYM] = LAYOUT(
         DE_DEG,  DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC, DE_EXLM, DE_LABK, DE_RABK, DE_EQL,  DE_AMPR,
         DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR, DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN,
-        DE_HASH, DE_DLR,  DE_PIPE, DE_TILD, DE_GRV , DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN, 
+        DE_HASH, DE_DLR,  DE_PIPE, DE_TILD, DE_GRV , DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN,
 		DE_SECT, DE_EURO, DE_AT,   _______, _______, _______, _______, DE_AT,   DE_EURO, _______
     ),
 
@@ -107,14 +107,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_HOME,    KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,    DE_SLSH, KC_4, KC_5, KC_6, KC_COMM,
         KC_ESCAPE,  KC_TAB,  KC_INSERT, KC_ENTER,  KC_UNDO,   DE_COLN, KC_1, KC_2, KC_3, KC_DOT,
         #ifdef TWO_2U
-		_______, _______, _______, _______, _______, _______, KC_0, DE_EQL, DE_MINS, DE_SCLN
+        _______, _______, _______, _______, _______, _______, _______, KC_0, DE_MINS, DE_PLUS
         #endif
 	),
 
 	// Function Layer: F-keys, media, layer switch
     [_FUNC] = LAYOUT(
-        XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, KC_MUTE, KC_F7,   KC_F8,   KC_F9,   KC_F10,
-        XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,
+        XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, KC_MUTE, KC_F7,   KC_F8,   KC_F9,   KC_F10,
+        XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_F11,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_F12,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
