@@ -25,6 +25,7 @@
 #define ONESHOT_TAP_TOGGLE 3  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
 
-/* #define MODULAR_BONGOCAT_ENABLE */
-/* #define QMK_LOGO_ENABLE */
-/* #define KYRIA_LOGO_ENABLE */
+// Combos
+/* #define COMBO_COUNT 2 */
+#define COMBO_TERM 15
+#define COMBO_MUST_TAP_PER_COMBO
