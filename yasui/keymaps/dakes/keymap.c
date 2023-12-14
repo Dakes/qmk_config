@@ -29,10 +29,9 @@ enum layers {
 
 // Combos
 #ifdef COMBO_ENABLE
-#define COMBO_ONLY_FROM_LAYER _COLEMAK_DH
-/* const uint16_t PROGMEM c_tab[] = {KC_F, KC_P, COMBO_END}; */
+// #define COMBO_ONLY_FROM_LAYER _COLEMAK_DH
 const uint16_t PROGMEM c_tab[] = {LALT_T(KC_S), LCTL_T(KC_T), COMBO_END};
-const uint16_t PROGMEM c_esc[] = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM c_esc[] = {KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM c_a_r[] = {KC_H, KC_COMM, COMBO_END};
 const uint16_t PROGMEM c_o_l[] = {KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM c_caps[] = {KC_Q, KC_W, COMBO_END};
@@ -107,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_HOME,    KC_LEFT, KC_DOWN,   KC_RIGHT,  KC_END,    DE_SLSH, KC_4, KC_5, KC_6, KC_COMM,
         KC_ESCAPE,  KC_TAB,  KC_INSERT, KC_ENTER,  KC_UNDO,   DE_COLN, KC_1, KC_2, KC_3, KC_DOT,
         #ifdef TWO_2U
-        _______, _______, _______, _______, _______, _______, _______, KC_0, DE_MINS, DE_PLUS
+        _______, _______, _______, _______, _______, _______, KC_0, _______, _______, KC_SPC
         #endif
 	),
 
